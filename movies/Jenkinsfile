@@ -141,11 +141,9 @@ pipeline {
         stage('Wait for deployment in Staging') {
             steps {
                 sh "oc get route ${APP_NAME} -n ${STAGE_PROJECT} -o jsonpath='{ .spec.host }' --loglevel=4 > routeHost"
-
                 script {
                     routeHost = readFile('routehost').trim()
-
-/                        }
+                        }
                         echo "Deployment to Staging env is complete. Access the API endpoint at the URL http://${routeHost}/movies."
                     }
                 }
